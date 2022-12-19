@@ -753,8 +753,7 @@ client.on("guildMemberRemove", async function (member) {
     await (
       await client.channels.fetch("945348551599349770")
     ).setName("😎 General - " + count.toString() + "/500 Members");
-    var logs = await client.channels.fetch(scatt.channels.logs);
-    logs.send({
+    scatt.log({
       content: `<:goodbye:1043391556553555978> <@${member.id}> just left.`,
     });
     var welcoming = await client.channels.fetch(scatt.channels.welcoming);
@@ -1350,8 +1349,7 @@ client.on("messageCreate", async function (message) {
         }
       });
       if (deleteMessage) {
-        var logs = await client.channels.fetch(scatt.channels.logs);
-        var msg = await logs.send({
+        var msg = await scatt.log({
           content: `<@${message.author.id}> just got blocked and warned for saying: ${message.content}`,
         });
         message.channel.send({
@@ -2012,10 +2010,8 @@ client.on("interactionCreate", async function (interaction) {
       const message = await interaction.channel.send({
         content: interaction.options.getString("content"),
       });
-      var logs = await client.channels.fetch(scatt.channels.logs);
-      logs.send({
+      scatt.log({
         content: `<@${interaction.user.id}> used me to say, "${interaction.options.getString("content")}" in <#${interaction.channel.id}>\n${message.url}`,
-        allowedMentions: { users: [] },
       });
     }
     if (commandName === "modmail") {
@@ -2105,15 +2101,13 @@ client.on("interactionCreate", async function (interaction) {
         ephemeral: true,
         allowedMentions: { users: [] },
       });
-      var logs = await client.channels.fetch(scatt.channels.logs);
-      logs.send({
+      scatt.log({
         content:
           "<@" +
           interaction.user.id +
           "> invited <@" +
           interaction.options.getUser("member").id +
           "> to contribute!",
-        allowedMentions: { users: [] },
       });
     }
     if (commandName === "roles") {
@@ -2467,8 +2461,7 @@ client.on("guildMemberUpdate", async (before, after) => {
     !before.roles.cache.some((role) => role.name === "Moderator")
   ) {
     if (after.nickname) {
-      var channel = await client.channels.fetch(scatt.channels.logs);
-      channel.send({
+      scatt.log({
         content: `<@${after.user.id}> changed their nickname from ${before.nickname} to ${after.nickname}.`,
       });
       var members = await before.guild.members.fetch();
