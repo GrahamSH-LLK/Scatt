@@ -2461,7 +2461,7 @@ client.on("guildMemberUpdate", async (before, after) => {
     !before.roles.cache.some((role) => role.name === "Moderator")
   ) {
       scatt.log({
-        content: `<@${after.user.id}> changed their nickname from "${before.nickname || before.username}" to "${after.nickname}".`,
+        content: `<@${after.user.id}> changed their nickname from "${before.nickname || before.username}" to "${after.nickname || after.username}".`,
       });
       var members = await before.guild.members.fetch();
       var taken = false;
