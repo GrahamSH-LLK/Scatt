@@ -2009,7 +2009,7 @@ client.on("interactionCreate", async function (interaction) {
         content: "<:successful:1043300109921829054> Done!",
         ephemeral: true,
       });
-      const message = interaction.channel.send({
+      const message = await interaction.channel.send({
         content: interaction.options.getString("content"),
       });
       var logs = await client.channels.fetch(scatt.channels.logs);
