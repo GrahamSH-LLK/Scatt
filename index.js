@@ -2500,7 +2500,6 @@ client.on("guildMemberUpdate", async (before, after) => {
         });
       }
     }
-  }
-});
+  });
 
 client.login(process.env.token);
